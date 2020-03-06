@@ -61,7 +61,7 @@ while(my $thing_1 = readdir $dh_1)
      #print "$thing_1\n";
      my @aFiles = split /_/, $thing_1;
      $missingJobid{$aFiles[1]} = $aFiles[2];
-     print "$missingJobid{$aFiles[1]}";
+     print "$missingJobid{$aFiles[1]}\n";
 
   }
 }
