@@ -70,22 +70,21 @@ closedir $dh_1;
 
 #Keys in missingnum and missingJobid match here
 chdir "${dir_to_open_2}";
-
 foreach my $i (keys %missingnum)
 {
     if($missingnum{$i}==0)
     {
-	print "$i $missingJobid{$i}\n";
-	#system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
-	#my $out = `cd ${dir_to_open_2}`;
+	   print "$i $missingJobid{$i}\n";
+	   #system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
+	   #my $out = `cd ${dir_to_open_2}`;
 
-	#print "$out\n";
-	#my $pwdout = `pwd`;
-	#print "$pwdout\n";
-	#system("ls *$missingJobid{$i}*");
-	print ("star-submit -r 0 $missingJobid{$i}.session.xml\n");
+	   #print "$out\n";
+	   #my $pwdout = `pwd`;
+	   #print "$pwdout\n";
+	   #system("ls *$missingJobid{$i}*");
+	   print ("star-submit -r 0 $missingJobid{$i}.session.xml\n");
 
-	system ("star-submit -r 0 $missingJobid{$i}.session.xml\n");# or die "could not execute $!\n";
+	   #system ("star-submit -r 0 $missingJobid{$i}.session.xml\n");# or die "could not execute $!\n";
     }
 
 }
