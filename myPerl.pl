@@ -53,7 +53,7 @@ for(my $i=$lowLimit; $i<=$upLimit; $i++)
 foreach my $number (@sorted)
 {
     $missingnum{$number} = 1;
-    print "$number \n";
+    #print "$number \n";
 }
 opendir my $dh_1, $dir_to_open_1 or die " Could not open $dir_to_open_1 $!\n";
 
