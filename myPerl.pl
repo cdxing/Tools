@@ -17,7 +17,7 @@ my @unsorted;
 while(my $thing = readdir $dh)
 {
 
-    if($thing =~ m/entryRangeEffCorr_\d{1,4}_\w*/)
+    if($thing =~ m/entryRange_\d{1,4}_\w*/)
     {
 	my @aFiles = split /_/, $thing;
 	push(@unsorted, $aFiles[1]);
