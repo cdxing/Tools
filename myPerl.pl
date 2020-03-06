@@ -48,7 +48,7 @@ my %missingJobid;
 
 while(my $thing_1 = readdir $dh_1)
 {
-  if($thing_1 =~ m/entryRangeEffCorr_\d{1,4}_\w*\.out/)
+  if($thing_1 =~ m/entryRange_\d{1,4}_\w*\.out/)
   {
      #print "$thing_1\n";
      my @aFiles = split /_/, $thing_1;
