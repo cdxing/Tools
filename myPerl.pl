@@ -1,4 +1,12 @@
 #!/usr/bin/perl
+#0, 3000
+#3001, 6000
+#6001, 9000
+#9001, 12000
+#12001, 15000
+#15001, 18000
+#18001, 20689
+
 
 use strict;
 use warnings;
@@ -7,7 +15,8 @@ my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
 my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
 my $dir_to_open_2 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
 
-#tmp/
+my $lowLimit  = $ARGV[0];
+my $upLimit   = $ARGV[1];
 
 opendir my $dh, $dir_to_open or die " Could not open $!\n";
 
@@ -31,7 +40,7 @@ closedir $dh;
 my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
-for(my $i=0; $i<=3000; $i++)
+for(my $i=$lowLimit; $i<=$upLimit; $i++)
 {
     $missingnum{$i} = 0;
 }
