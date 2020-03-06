@@ -27,11 +27,10 @@ my $upLimit   = $ARGV[1];
 opendir my $dh, $dir_to_open or die " Could not open $!\n";
 # Array of unsorted
 my @unsorted;
-$unsorted[20690]=0;
 while(my $thing = readdir $dh)
 {
 
-    if($thing =~ m/entryRange_\d{1,4}_\w*/)
+    if($thing =~ m/entryRange_\d{1,5}_\w*/)
     {
 	     my @aFiles = split /_/, $thing;
 	     push(@unsorted, $aFiles[1]);
