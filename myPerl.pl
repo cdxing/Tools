@@ -27,6 +27,7 @@ my $upLimit   = $ARGV[1];
 opendir my $dh, $dir_to_open or die " Could not open $!\n";
 # Array of unsorted
 my @unsorted;
+$unsorted[20690]=0;
 while(my $thing = readdir $dh)
 {
 
