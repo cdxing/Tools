@@ -45,7 +45,7 @@ closedir $dh;
 my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
-for(my $i=0; $i<=20689; $i++)
+for(my $i=$lowLimit; $i<=$upLimit; $i++)
 {
     $missingnum{$i} = 0;
 }
