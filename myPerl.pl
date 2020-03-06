@@ -61,7 +61,7 @@ while(my $thing_1 = readdir $dh_1)
      #print "$thing_1\n";
      my @aFiles = split /_/, $thing_1;
      $missingJobid{$aFiles[1]} = $aFiles[2];
-
+     print "$missingJobid{$aFiles[1]}";
 
   }
 }
@@ -74,7 +74,7 @@ foreach my $i (keys %missingnum)
 {
     if($missingnum{$i}==0)
     {
-	   print "$i $missingJobid{$i}\n";
+	   #print "$i $missingJobid{$i}\n";
 	   #system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
 	   #my $out = `cd ${dir_to_open_2}`;
 
