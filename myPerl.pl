@@ -4,8 +4,8 @@ use strict;
 use warnings;
 
 my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
-my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
-my $dir_to_open_2 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
+my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
+my $dir_to_open_2 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
 
 #tmp/
 
@@ -19,9 +19,9 @@ while(my $thing = readdir $dh)
 
     if($thing =~ m/entryRange_\d{1,4}_\w*/)
     {
-	my @aFiles = split /_/, $thing;
-	push(@unsorted, $aFiles[1]);
-	#print "$aFiles[1]\n";
+	     my @aFiles = split /_/, $thing;
+	     push(@unsorted, $aFiles[1]);
+	     #print "$aFiles[1]\n";
        # print " $thing \n";
     }
 
@@ -29,7 +29,6 @@ while(my $thing = readdir $dh)
 
 closedir $dh;
 my @sorted = sort{$a <=> $b} @unsorted;
-
 
 my %missingnum;
 for(my $i=0; $i<=3000; $i++)
@@ -48,7 +47,7 @@ my %missingJobid;
 
 while(my $thing_1 = readdir $dh_1)
 {
-  if($thing_1 =~ m/entryRange_\d{1,4}_\w*\.out/)
+  if($thing_1 =~ m/entryRange_\d{1,4}_\w*\.err/)
   {
      #print "$thing_1\n";
      my @aFiles = split /_/, $thing_1;
