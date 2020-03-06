@@ -87,7 +87,7 @@ foreach my $i (keys %missingnum)
 	   #my $pwdout = `pwd`;
 	   #print "$pwdout\n";
 	   #system("ls *$missingJobid{$i}*");
-	   #print ("star-submit -r 0 $missingJobid{$i}.session.xml\n");
+	   print ("star-submit -r 0 $missingJobid{$i}.session.xml\n");
 
 	   #system ("star-submit -r 0 $missingJobid{$i}.session.xml\n");# or die "could not execute $!\n";
     }
