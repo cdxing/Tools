@@ -11,18 +11,23 @@
 use strict;
 use warnings;
 
+# 3 Directories:
+# Dir 1: result
+# Dir 2: scheduler/out
+# Dir 3: scheduler/tmp
 my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
 my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
 my $dir_to_open_2 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
 
+# entryRange low limit and up limit
 my $lowLimit  = $ARGV[0];
 my $upLimit   = $ARGV[1];
 
+# open result/ directory
 opendir my $dh, $dir_to_open or die " Could not open $!\n";
 
+# Array of unsorted
 my @unsorted;
-
-
 while(my $thing = readdir $dh)
 {
 
@@ -30,8 +35,8 @@ while(my $thing = readdir $dh)
     {
 	     my @aFiles = split /_/, $thing;
 	     push(@unsorted, $aFiles[1]);
-	     #print "$aFiles[1]\n";
-       # print " $thing \n";
+	     print "$aFiles[1]\n";
+       print " $thing \n";
     }
 
 }
@@ -61,7 +66,7 @@ while(my $thing_1 = readdir $dh_1)
      #print "$thing_1\n";
      my @aFiles = split /_/, $thing_1;
      $missingJobid{$aFiles[1]} = $aFiles[2];
-     print "$missingJobid{$aFiles[1]}\n";
+     #print "$missingJobid{$aFiles[1]}\n";
 
   }
 }
