@@ -25,7 +25,6 @@ my $upLimit   = $ARGV[1];
 
 # open result/ directory
 opendir my $dh, $dir_to_open or die " Could not open $!\n";
-
 # Array of unsorted
 my @unsorted;
 while(my $thing = readdir $dh)
@@ -35,13 +34,14 @@ while(my $thing = readdir $dh)
     {
 	     my @aFiles = split /_/, $thing;
 	     push(@unsorted, $aFiles[1]);
-	     print "$aFiles[1]\n";
-       print " $thing \n";
+	     #print "$aFiles[1]\n";
+       #print " $thing \n";
     }
 
 }
-
 closedir $dh;
+
+# Array of sorted files
 my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
@@ -53,7 +53,7 @@ for(my $i=$lowLimit; $i<=$upLimit; $i++)
 foreach my $number (@sorted)
 {
     $missingnum{$number} = 1;
-    #print "$number \n";
+    print "$number \n";
 }
 opendir my $dh_1, $dir_to_open_1 or die " Could not open $dir_to_open_1 $!\n";
 
