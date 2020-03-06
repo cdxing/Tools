@@ -79,7 +79,7 @@ foreach my $i (keys %missingnum)
 {
     if($missingnum{$i}==0)
     {
-	   #print "$i $missingJobid{$i}\n";
+	   print "$i $missingJobid{$i}\n";
 	   #system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
 	   #my $out = `cd ${dir_to_open_2}`;
 
