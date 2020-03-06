@@ -86,7 +86,7 @@ foreach my $i (keys %missingnum)
 	   #my $pwdout = `pwd`;
 	   #print "$pwdout\n";
 	   #system("ls *$missingJobid{$i}*");
-	   print ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$1\n");
+	   print ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n");
 	   #system ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$1\n");# or die "could not execute $!\n";
     }
 
