@@ -52,7 +52,7 @@ for(my $i=0; $i<=20689; $i++)
 foreach my $number (@sorted)
 {
     $missingnum{$number} = 1;
-    print "$number \n";
+    # print "$number \n";
 }
 opendir my $dh_1, $dir_to_open_1 or die " Could not open $dir_to_open_1 $!\n";
 
@@ -80,7 +80,7 @@ foreach my $i (keys %missingnum)
     {
       if($missingnum{$i}==0)
       {
-  	   print "$i ";#$missingJobid{$i}\n";
+  	   print "$i $missingJobid{$i}\n";
   	   #system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
   	   #my $out = `cd ${dir_to_open_2}`;
 
