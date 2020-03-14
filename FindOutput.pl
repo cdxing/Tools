@@ -80,7 +80,8 @@ foreach my $i (keys %missingnum)
     {
       if($missingnum{$i}==0)
       {
-  	   print "$i $missingJobid{$i}\n";
+  	   print "$i ";#$missingJobid{$i}\n";
+       print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i";
   	   #system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
   	   #my $out = `cd ${dir_to_open_2}`;
 
