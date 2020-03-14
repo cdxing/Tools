@@ -1,11 +1,16 @@
 #!/usr/bin/perl
-#0, 3000
-#3001, 6000
-#6001, 9000
-#9001, 12000
-#12001, 15000
-#15001, 18000
-#18001, 20689
+# ./FindOutput.pl 0 1999
+# ./FindOutput.pl 2000 3999
+# ./FindOutput.pl 4000 5999
+# ./FindOutput.pl 6000 7999
+# ./FindOutput.pl 8000 9999
+# ./FindOutput.pl 10000 11999
+# ./FindOutput.pl 12000 13999
+# ./FindOutput.pl 14000 15999
+# ./FindOutput.pl 16000 17999
+# ./FindOutput.pl 18000 19999
+# ./FindOutput.pl 20000 20689
+
 
 
 use strict;
@@ -80,10 +85,11 @@ foreach my $i (keys %missingnum)
     {
       if($missingnum{$i}==0)
       {
-  	   print "$i ";#$missingJobid{$i}\n";
+  	   print "$i ";
        print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
-  	   #system ("cd ${dir_to_open_2}/") or die "could not execute $!\n";
-  	   #my $out = `cd ${dir_to_open_2}`;
+       system "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
+
+       #my $out = `cd ${dir_to_open_2}`;
 
   	   #print "$out\n";
   	   #my $pwdout = `pwd`;
