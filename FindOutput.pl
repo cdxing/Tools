@@ -83,7 +83,7 @@ foreach my $i (keys %missingnum)
 {
     if ($i>=$lowLimit and $i<= $upLimit)
     {
-      if($missingnum{$i}==1)
+      if($missingnum{$i}==0)
       {
   	   print "$i \n";
        # print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
