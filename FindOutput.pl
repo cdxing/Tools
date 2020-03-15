@@ -19,9 +19,11 @@ use warnings;
 # 3 Directories:
 # Dir 1: scheduler/out
 # Dir 3: scheduler/tmp
-my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
+# my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
+my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
+
 my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
-my $filename = 'report.txt';
+my $filename = 'result.txt';
 open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
 
 # entryRange low limit and up limit
