@@ -81,7 +81,7 @@ closedir $dh_1;
 chdir "${dir_to_open_1}";
 for(my $i=$lowLimit; $i<=$upLimit; $i++)
 {
-  if($missingnum{$i}==0);
+  if($missingnum{$i}==0)
   {
    print "$i \n";
    # print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
