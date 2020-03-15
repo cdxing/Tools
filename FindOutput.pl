@@ -21,6 +21,8 @@ use warnings;
 # Dir 3: scheduler/tmp
 my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/out";
 my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
+my $filename = 'report.txt';
+open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
 
 # entryRange low limit and up limit
 my $lowLimit  = $ARGV[0];
@@ -83,7 +85,7 @@ for(my $i=$lowLimit; $i<=$upLimit; $i++)
 {
   if($missingnum{$i}==0)
   {
-   print "$i \n";
+   print $fh "$i \n";
    # print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
    # system "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
 
@@ -97,5 +99,7 @@ for(my $i=$lowLimit; $i<=$upLimit; $i++)
    #system ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$1\n");# or die "could not execute $!\n";
   }
 }
+close $fh;
+print "done\n";
 
 `ls .`;
