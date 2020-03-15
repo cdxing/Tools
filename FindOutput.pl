@@ -79,27 +79,23 @@ closedir $dh_1;
 
 #Keys in missingnum and missingJobid match here
 chdir "${dir_to_open_1}";
-foreach my $i (keys %missingnum)
+for(my $i=$lowLimit; $i<=$upLimit; $i++)
 {
-    if ($i>=$lowLimit and $i<= $upLimit)
-    {
-      if($missingnum{$i}==0)
-      {
-  	   print "$i \n";
-       # print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
-       # system "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
+  if($missingnum{$i}==0);
+  {
+   print "$i \n";
+   # print "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
+   # system "star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n";
 
-       #my $out = `cd ${dir_to_open_2}`;
+   #my $out = `cd ${dir_to_open_2}`;
 
-  	   #print "$out\n";
-  	   #my $pwdout = `pwd`;
-  	   #print "$pwdout\n";
-  	   #system("ls *$missingJobid{$i}*");
-  	   #print ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n");
-  	   #system ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$1\n");# or die "could not execute $!\n";
-      }
-    }
-
+   #print "$out\n";
+   #my $pwdout = `pwd`;
+   #print "$pwdout\n";
+   #system("ls *$missingJobid{$i}*");
+   #print ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$i\n");
+   #system ("star-submit-template -template submitPicoDstJobs1.xml -entities myFileName=entryRange_$i,entryTestPar1=$1\n");# or die "could not execute $!\n";
+  }
 }
 
 `ls .`;
