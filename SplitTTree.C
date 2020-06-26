@@ -96,7 +96,7 @@ TString outFile = "test")
   Int_t nFile = 0;
   string file;
   while(getline(inputStream, file)) {
-    if(file.find(".picoDst.result.root") != string::npos) {
+    if(file.find(".root") != string::npos) {
       TFile* ftmp = TFile::Open(file.c_str());
       if(ftmp && !ftmp->IsZombie() && ftmp->GetNkeys()) {
         cout << " Read in picoDst file " << file << endl;
