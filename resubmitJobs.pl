@@ -16,7 +16,7 @@
 # c) Depending on the THE_COMMOM_PATTERN_OF_RESULT_FILES,
 # one may want to tweak the parameter of $aFiles, one can find an example in the while loop
 # my $vAppend  = $aFiles[1]; # XX.picoDst.result.root
-#       $JobID = $aFiles[0]; # JOBID 
+#       $JobID = $aFiles[0]; # JOBID
 #
 # d) Run this scipt:
 # chmod u+x resubmitJobs.pl
@@ -77,7 +77,7 @@ my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
 # a hash of missing numbers
-for(my $i=0; $i<=8452; $i++) # modify the total # of Jobs here
+for(my $i=0; $i<=401; $i++) # modify the total # of Jobs here
 {
     $missingnum{$i} = 0;
 }
