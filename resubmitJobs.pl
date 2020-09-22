@@ -1,5 +1,28 @@
 #!/usr/bin/perl
-
+####################################################
+#
+# This Perl script is used to find missing jobs
+# Auhtor: Ding Chen, David Kapukchyan
+# Date: Sep.22 2020
+#
+# How to use this script:
+#
+# a) change the file paths: 1. $dir_to_open; 2.$dir_to_open_1
+# They are the the paths of result .root files and scheduler .xml files
+#
+# b) change the total number of jobs of the scheduelr in the for loop of %missingnum
+# %missingnum is a hash table for the missing jobs
+#
+# c) Depending on the THE_COMMOM_PATTERN_OF_RESULT_FILES,
+# one may want to tweak the parameter of $aFiles, one can find an example in the while loop
+# my $vAppend  = $aFiles[1]; # XX.picoDst.result.root
+#       $JobID = $aFiles[0]; # JOBID 
+#
+# d) Run this scipt:
+# chmod u+x resubmitJobs.pl
+# ./resubmitJobs.pl THE_COMMOM_PATTERN_OF_RESULT_FILES
+#
+####################################################
 use strict;
 use warnings;
 
@@ -31,22 +54,21 @@ while(my $thing = readdir $dh)
     # Choose files which have the pattern "name"
     if($thing =~ m/$name\w*/)
     {
-	 my @aFiles   = split /_/, $thing;
-	 #split the file name into several sections by "_"
-	 #Example: AB8F79ABBB628CC0B96256E4863BF059_50.picoDst.result.root ==> @aFiles = {AB8F79ABBB628CC0B96256E4863BF059, 50.picoDst.result.root}
-         my $vAppend  = $aFiles[1];
-	 # 50.picoDst.result.root
-               $JobID = $aFiles[0];
-	 # AB8F79ABBB628CC0B96256E4863BF059
-         my @aNumbers = split /\./, $vAppend;
-	 #  50.picoDst.result.root ==> @aNumbers = {50, picoDst, result, root}
-         push(@unsorted, $aNumbers[0]);
-	 # Put 50 into array @unsorted
+      my @aFiles   = split /_/, $thing;
+	    #split the file name into several sections by "_"
+	    #Example: AB8F79ABBB628CC0B96256E4863BF059_50.picoDst.result.root ==> @aFiles = {AB8F79ABBB628CC0B96256E4863BF059, 50.picoDst.result.root}
+      my $vAppend  = $aFiles[1]; # Modify the parameter to get the last section divided by "_"
+	    # 50.picoDst.result.root
+      $JobID = $aFiles[0]; # Modify the parameter to get the JOBID
+	    # AB8F79ABBB628CC0B96256E4863BF059
+      my @aNumbers = split /\./, $vAppend;
+	    #  50.picoDst.result.root ==> @aNumbers = {50, picoDst, result, root}
+      push(@unsorted, $aNumbers[0]);
+	    # Put 50 into array @unsorted
 
-	 #print "$aNumbers[0]\n";
-	 # print " $thing \n";
+	    #print "$aNumbers[0]\n";
+	    # print " $thing \n";
     }
-
 }
 closedir $dh;
 
@@ -55,7 +77,7 @@ my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
 # a hash of missing numbers
-for(my $i=0; $i<=8452; $i++)
+for(my $i=0; $i<=8452; $i++) # modify the total # of Jobs here
 {
     $missingnum{$i} = 0;
 }
@@ -88,3 +110,4 @@ my $jobString = join(',',@missingDst);
 
 print ("star-submit -r $jobString $JobID.session.xml\n");
 #system("star-submit -r $jobString $JobID.session.xml\n");
+# Uncomment the line above to re-submit jobs directly

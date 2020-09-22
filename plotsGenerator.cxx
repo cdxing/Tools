@@ -10,7 +10,7 @@ int plotsGenerator(const char* inFile = "./src/97D2AFB119464E2BB781CF04F1524B05.
   TFile* F_3p85_1stEpCorrINPUT = TFile::Open("./src/26p5_1stEpCorrINPUT.root");
   TFile* F_3p85corrResult = TFile::Open("./src/26p5corrResult.root");
   TFile* F_26p5_1stEps = TFile::Open("./src/26p5_1stEpdEpWeightedINPUT.root");
-  TFile* F_26p5_1stEpCorrINPUT = TFile::Open("./src/26p5_1stEpWeightedCorrINPUT.root");
+  TFile* F_26p5_1stEpCorrINPUT = TFile::Open("./src/26p5v1VsEta.root");
   TFile* F_26p5corrResult = TFile::Open("./src/26p5_1stEpWeightedCorrResult.root");
   if (!F_3p85_1stEps || F_3p85_1stEps->IsZombie()){
     std::cout<<"Cannot open the file"<<inFile<<std::endl;
