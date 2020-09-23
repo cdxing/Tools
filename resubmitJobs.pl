@@ -77,7 +77,7 @@ my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
 # a hash of missing numbers
-for(my $i=0; $i<=401; $i++) # modify the total # of Jobs here
+for(my $i=0; $i<=400; $i++) # modify the total # of Jobs here
 {
     $missingnum{$i} = 0;
 }
@@ -109,5 +109,5 @@ my $jobString = join(',',@missingDst);
 # make array of missingDst into a string separated by ","
 
 print ("star-submit -r $jobString $JobID.session.xml\n");
-# system("star-submit -r $jobString $JobID.session.xml\n");
+system("star-submit -r $jobString $JobID.session.xml\n");
 # Uncomment the line above to re-submit jobs directly
