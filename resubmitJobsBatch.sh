@@ -23,7 +23,7 @@
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nHitsFit_var2_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nSigK_var1_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nSigK_var2_iter3
-./resubmitJobs.pl EpCorrection_OUTPUT_sys_primary_var0_iter3
+# ./resubmitJobs.pl EpCorrection_OUTPUT_sys_primary_var0_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_pT_var1_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_pT_var2_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_ratio_var1_iter3
