@@ -24,10 +24,32 @@
 
 Double_t resoErr(Double_t corrAB, Double_t corrAC, Double_t corrBC,
                  Double_t errAB, Double_t errAC, Double_t errBC);
+
 Double_t resoVal(Double_t corrAB, Double_t corrAC, Double_t corrBC);
+
 const int _Ncentralities = 9;
-int corrFinder(){
-  TFile* inFile = new TFile("./res/res_sysErr/merged_EpCorrection_OUTPUT_sys_etaGap_var2_iter1_207E5DF8B847DCF7C9680FE70B213088_.root","READ");
+int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OUTPUT_sys_etaGap_var2_iter1_207E5DF8B847DCF7C9680FE70B213088_.root",
+               Int_t   inputp2 = 0, // sysErr cut Indexes 0-15
+               Int_t   inputp3 = 0, // sysErr cut variations, each systematic check has 2 or 3 vertions
+               Int_t   inputp4 = 0 // Iteration of the analysis is. In this analysis, 2 iterations is enough
+              ){
+  // Int_t EpOrder = inputp1; // Event plane Fourier expansion order = 1, 2, 3
+  Int_t sys_cutN = inputp2; // sysErr cut Indexes 0-15
+  Int_t sys_varN = inputp3; // sysErr cut variations, each systematic check has 2 or 3 vertions
+  Int_t sys_iterN = inputp4; // Iteration of the analysis is. In this analysis, 2 iterations is enough
+  string sys_object[18]  = {"primary", "etaGap", "etaRange",
+                            "vz", "vr", "dedx", "dca",
+                            "nHitsFit", "ratio", "nSigK", "mass2",
+                            "pT", "dipAngle", "vtxDiff", "mthdDiff",
+                            "binning",
+                            "looseTOF", "dianaPID"};
+  std::cout << "sys_cutN == "<< sys_cutN <<": "<< sys_object[sys_cutN] << std::endl;
+  TFile* inFile = new TFile(TsInfile,"READ");
+  TString outTxt = "Resolution_INPUT_sys_";
+  outTxt.Append(sys_object[sys_cutN]);
+  outTxt.Append(Form("_var%d_iter%d_", sys_varN, sys_iterN));
+  outTxt.Append(".txt");
+  std::ofstream ResoFile(outTxt,ofstream::out);
 
   TProfile *profile_correlation_epd_east[2][6], *profile_correlation_epd_tpc[2][4];
   Double_t binContentEpd[2][6][_Ncentralities]; // Indexes R1, R2; correlations; centrality
@@ -102,7 +124,13 @@ int corrFinder(){
   }
 
   // ------------------ Fill into historgrams ----------------------------------
-  TFile* outFile = new TFile("./res/res_sysErr/sys_etaGap_var2_iter2_CorrResult.root","RECREATE");
+  TString TsOutFile = "CorrReso_OUTPUT_";
+  TsOutFile.Append("sys_");
+  TsOutFile.Append(sys_object[sys_cutN]);
+  TsOutFile.Append(Form("_var%d_iter%d_", sys_varN, sys_iterN));
+  TsOutFile.Append(".picoDst.result.root");
+  TsOutFile.Prepend("./res/res_sysErr/");
+  TFile* outFile = new TFile(TsOutFile,"RECREATE");
   TH1D *hist_correlation_epd_east[2][6], *hist_correlation_epd_tpc[2][4];
   TCanvas* c1[5];
   TLegend *legend[5];
@@ -266,7 +294,10 @@ int corrFinder(){
       ey5_1[n][j]=ep5Err[n][0][j];
 
        y1_2[n][j]=ep1Reso[n][1][j];
-      if(n==0)cout<<y1_2[n][j]<<","; // EPD 1, 3 TPC. n == 0 R1,
+      if(n==0){
+        cout<<y1_2[n][j]<<",";
+        ResoFile << y1_2[n][j] << endl;
+      }// EPD 1, 3 TPC. n == 0 R1,
      ey1_2[n][j]=ep1Err[n][1][j];
       y2_2[n][j]=ep2Reso[n][1][j];
      ey2_2[n][j]=ep2Err[n][1][j];
@@ -578,6 +609,8 @@ int corrFinder(){
     c1[i]->Write();
   }
   outFile->Write();
+  ResoFile.close();
+
   return 0;
 }
 
