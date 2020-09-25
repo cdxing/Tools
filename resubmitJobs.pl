@@ -99,7 +99,7 @@ foreach my $i (keys %missingnum)
     {
       push(@missingDst, $i);
 
-      print ("star-submit -r $i $JobID.session.xml\n");
+      # print ("star-submit -r $i $JobID.session.xml\n");
 
     }
 
