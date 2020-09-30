@@ -57,9 +57,9 @@ while(my $thing = readdir $dh)
       my @aFiles   = split /_/, $thing;
 	    #split the file name into several sections by "_"
 	    #Example: AB8F79ABBB628CC0B96256E4863BF059_50.picoDst.result.root ==> @aFiles = {AB8F79ABBB628CC0B96256E4863BF059, 50.picoDst.result.root}
-      my $vAppend  = $aFiles[7]; # Modify the parameter to get the last section divided by "_"
+      my $vAppend  = $aFiles[5]; # Modify the parameter to get the last section divided by "_"
 	    # 50.picoDst.result.root
-      $JobID = $aFiles[6]; # Modify the parameter to get the JOBID
+      $JobID = $aFiles[4]; # Modify the parameter to get the JOBID
 	    # AB8F79ABBB628CC0B96256E4863BF059
       my @aNumbers = split /\./, $vAppend;
 	    #  50.picoDst.result.root ==> @aNumbers = {50, picoDst, result, root}
