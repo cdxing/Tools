@@ -26,12 +26,12 @@
 use strict;
 use warnings;
 
-my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/result";
-#my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
+# my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/result";
+my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
 # Directory where the output files are
 
-my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/scheduler/tmp";
-#my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
+# my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/scheduler/tmp";
+my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
 # Directory where you submit jobs
 
 #my $dir_to_open_2 = "/star/data01/pwg/dchen/Ana/fxtPicoAna/phiAna/phiInvMass/scheduler/tmp";
@@ -77,7 +77,7 @@ my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
 # a hash of missing numbers
-for(my $i=0; $i<=400; $i++) # modify the total # of Jobs here
+for(my $i=0; $i<=1049; $i++) # modify the total # of Jobs here
 {
     $missingnum{$i} = 0;
 }
@@ -109,5 +109,5 @@ my $jobString = join(',',@missingDst);
 # make array of missingDst into a string separated by ","
 
 print ("star-submit -r $jobString $JobID.session.xml\n");
-system("star-submit -r $jobString $JobID.session.xml\n");
+# system("star-submit -r $jobString $JobID.session.xml\n");
 # Uncomment the line above to re-submit jobs directly
