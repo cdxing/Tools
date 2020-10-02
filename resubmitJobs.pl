@@ -108,6 +108,6 @@ foreach my $i (keys %missingnum)
 my $jobString = join(',',@missingDst);
 # make array of missingDst into a string separated by ","
 
-# print ("star-submit -r $jobString $JobID.session.xml\n");
-system("star-submit -r $jobString $JobID.session.xml\n");
+print ("star-submit -r $jobString $JobID.session.xml\n");
+# system("star-submit -r $jobString $JobID.session.xml\n");
 # Uncomment the line above to re-submit jobs directly
