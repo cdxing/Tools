@@ -77,7 +77,7 @@ my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
 # a hash of missing numbers
-for(my $i=0; $i<=1600; $i++) # modify the total # of Jobs here
+for(my $i=0; $i<=2212; $i++) # modify the total # of Jobs here
 {
     $missingnum{$i} = 0;
 }
