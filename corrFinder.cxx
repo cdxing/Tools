@@ -28,12 +28,18 @@ Double_t resoErr(Double_t corrAB, Double_t corrAC, Double_t corrBC,
 Double_t resoVal(Double_t corrAB, Double_t corrAC, Double_t corrBC);
 
 const int _Ncentralities = 9;
-int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OUTPUT_sys_etaGap_var2_iter1_207E5DF8B847DCF7C9680FE70B213088_.root",
+int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor/res_sys/result_sys_flow/merged_EpCorrection_OUTPUT_sys_primary_var0_iter3_.root",
                Int_t   inputp2 = 0, // sysErr cut Indexes 0-15
                Int_t   inputp3 = 0, // sysErr cut variations, each systematic check has 2 or 3 vertions
                Int_t   inputp4 = 0 // Iteration of the analysis is. In this analysis, 2 iterations is enough
               ){
+
   // Int_t EpOrder = inputp1; // Event plane Fourier expansion order = 1, 2, 3
+  gStyle->SetOptStat(0);
+  gStyle->SetOptDate(0);
+  gStyle->SetEndErrorSize(6);
+  gStyle->SetOptTitle(0);
+
   Int_t sys_cutN = inputp2; // sysErr cut Indexes 0-15
   Int_t sys_varN = inputp3; // sysErr cut variations, each systematic check has 2 or 3 vertions
   Int_t sys_iterN = inputp4; // Iteration of the analysis is. In this analysis, 2 iterations is enough
@@ -139,7 +145,9 @@ int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OU
     c1[i]->GetFrame()->SetFillColor(21);
     c1[i]->GetFrame()->SetBorderSize(12);
     c1[i]->DrawFrame(0., 0.01, 80., 0.7);
-    legend[i] = new TLegend(0.1,0.7,0.48,0.9);
+    c1[0]->DrawFrame(0., 0.01, 60., 0.7);
+    legend[i] = new TLegend(0.15,0.8,0.48,0.88);
+    legend[i] ->SetBorderSize(0);
   }
   Double_t x[_Ncentralities]  = {2.5,7.5,15,25,35,45,55,65,75};
   Double_t ex[_Ncentralities] = {2.5,2.5,5,5,5,5,5,5,5};
@@ -347,7 +355,7 @@ int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OU
       ey1_2[n][3],ey1_2[n][4],ey1_2[n][5],
       ey1_2[n][6],ey1_2[n][7],ey1_2[n][8],
     };
-    gr1[n][1] = new TGraphErrors(_Ncentralities,x,d_y1_2,ex,d_ey1_2);
+    gr1[n][1] = new TGraphErrors(_Ncentralities-2,x,d_y1_2,ex,d_ey1_2); // remove the 60 - 80 bin
     gr1[n][1]->SetTitle("EPD sub1 event plane ");
     gr1[n][1]->SetMarkerColor(2*n+2);
     gr1[n][1]->SetMarkerStyle(22);
@@ -535,7 +543,7 @@ int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OU
     gr5[n][2]->SetMarkerStyle(23);
   }
   // legend[0]->AddEntry(gr1[0][0],"R_{1} EPD-1 VS EPD-2 & TPC","p");
-  legend[0]->AddEntry(gr1[0][1],"R_{1} EPD-1 VS EPD-2 & TPC","p");
+  legend[0]->AddEntry(gr1[0][1],"R_{1}","lp"); //EPD-1 VS EPD-2 & TPC
   // legend[0]->AddEntry(gr1[0][2],"R_{1} EPD-1 VS EPD-4 & TPC","p");
   legend[1]->AddEntry(gr2[0][0],"R_{1} EPD-2 VS EPD-1 & TPC","p");
   legend[1]->AddEntry(gr2[0][1],"R_{1} EPD-2 VS EPD-3 & TPC","p");
@@ -550,7 +558,7 @@ int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OU
   legend[4]->AddEntry(gr5[0][1],"R_{1} TPC VS EPD-2 & EPD-3","p");
   legend[4]->AddEntry(gr5[0][2],"R_{1} TPC VS EPD-3 & EPD-4","p");
   // legend[0]->AddEntry(gr1[1][0],"R_{2} EPD-1 VS EPD-2 & TPC","p");
-  legend[0]->AddEntry(gr1[1][1],"R_{2} EPD-1 VS EPD-2 & TPC","p");
+  // legend[0]->AddEntry(gr1[1][1],"R_{2} EPD-1 VS EPD-2 & TPC","p");
   // legend[0]->AddEntry(gr1[1][2],"R_{2} EPD-1 VS EPD-4 & TPC","p");
   legend[1]->AddEntry(gr2[1][0],"R_{2} EPD-2 VS EPD-1 & TPC","p");
   legend[1]->AddEntry(gr2[1][1],"R_{2} EPD-2 VS EPD-3 & TPC","p");
@@ -565,13 +573,24 @@ int corrFinder(const TString TsInfile = "./res/res_sysErr/merged_EpCorrection_OU
   legend[4]->AddEntry(gr5[1][1],"R_{2} TPC VS EPD-2 & EPD-3","p");
   legend[4]->AddEntry(gr5[1][2],"R_{2} TPC VS EPD-3 & EPD-4","p");
   c1[0]->cd();
+  TPaveText * ptxt_prelim = new TPaveText(0.65,0.7,0.88,0.85,"NDCARC");
+  ptxt_prelim->SetFillColor(0);
+  ptxt_prelim -> AddText("Au+Au 7.2 GeV FXT");
+  ptxt_prelim -> AddText("STAR preliminary");
+  TH2D * histTemp = new TH2D("histTemp","histTemp",1000,0,60,1000,0,0.6);
+  // histTemp->GetYaxis()->SetTitle("dv_{1}/dy|_{y=0}");
+  histTemp->GetYaxis()->SetTitleOffset(1);
+  histTemp->GetYaxis()->SetTitle("Resolution");
+  histTemp->GetXaxis()->SetTitle("Centrality [%]");
+  histTemp->Draw();
   // gr1[0][0]->Draw("P");
-  gr1[0][1]->Draw("P");
+  gr1[0][1]->Draw("sameP");
+  ptxt_prelim->Draw("same");
   // gr1[0][2]->Draw("P");
   // gr1[1][0]->Draw("P");
-  gr1[1][1]->Draw("P");
+  // gr1[1][1]->Draw("P");
   // gr1[1][2]->Draw("P");
-  legend[0]->Draw();
+  legend[0]->Draw("same");
   c1[1]->cd();
   gr2[0][0]->Draw("P");
   gr2[0][1]->Draw("P");

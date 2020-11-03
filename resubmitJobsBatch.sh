@@ -35,5 +35,9 @@
 # ./resubmitJobs.pl EpCorrection_OUTPUT_sys_TPCpid_var0_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_TPCpid_var1_iter3
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_TPCpid_var2_iter3
+
 # Additonal sys check for dip angle and eta Range
-./resubmitJobs.pl EpCorrection_OUTPUT_sys_TPCpid_var2_iter3
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dipAngle_var2_iter3
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dipAngle_var3_iter3
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_etaRange_var3_iter1
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_etaRange_var4_iter1
