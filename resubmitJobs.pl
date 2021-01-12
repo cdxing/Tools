@@ -26,11 +26,11 @@
 use strict;
 use warnings;
 
-my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/result";
+my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018_psi2/result";
 #my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
 # Directory where the output files are
 
-my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/scheduler/tmp";
+my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018_psi2/scheduler/tmp";
 #my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
 # Directory where you submit jobs
 
