@@ -19,10 +19,10 @@
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_etaRange_var2_iter1
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_etaRange_var3_iter1
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_mass2_var1_iter1
-# ./resubmitJobs.pl EpCorrection_OUTPUT_sys_mass2_var2_iter1
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_mass2_var2_iter1
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nHitsFit_var1_iter1
-# ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nHitsFit_var2_iter1
-# ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nSigK_var1_iter1
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_nHitsFit_var2_iter1
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_nSigK_var1_iter1
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_nSigK_var2_iter1
 # ./resubmitJobs.pl EpCorrection_OUTPUT_sys_primary_var0_iter1
 ./resubmitJobs.pl EpCorrection_OUTPUT_sys_pT_var1_iter1
