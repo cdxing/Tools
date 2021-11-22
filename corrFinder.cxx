@@ -17,7 +17,7 @@
 
 ////////////////////////////////////////
 //
-// Read and generate correlation and resolution information
+// Read and generate correlation and resolution of event planes
 //
 ////////////////////////////////////////
 
@@ -28,10 +28,10 @@ Double_t resoErr(Double_t corrAB, Double_t corrAC, Double_t corrBC,
 Double_t resoVal(Double_t corrAB, Double_t corrAC, Double_t corrBC);
 
 const int _Ncentralities = 9;
-int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor/res_sys/result_sys_flow/merged_EpCorrection_OUTPUT_sys_primary_var0_iter3_.root",
+int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor/res_sys/result_sys_crosscheck/merged_EpCorrection_OUTPUT_sys_primary_var0_iter3_313059B2E1E22B341AA696D055BD7BF6_.root",
                Int_t   inputp2 = 0, // sysErr cut Indexes 0-15
                Int_t   inputp3 = 0, // sysErr cut variations, each systematic check has 2 or 3 vertions
-               Int_t   inputp4 = 0 // Iteration of the analysis is. In this analysis, 2 iterations is enough
+               Int_t   inputp4 = 3 // Iteration of the analysis is. In this analysis, 2 iterations is enough
               ){
 
   // Int_t EpOrder = inputp1; // Event plane Fourier expansion order = 1, 2, 3
@@ -51,10 +51,12 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
                             "looseTOF", "dianaPID"};
   std::cout << "sys_cutN == "<< sys_cutN <<": "<< sys_object[sys_cutN] << std::endl;
   TFile* inFile = new TFile(TsInfile,"READ");
-  TString outTxt = "Resolution_INPUT_sys_";
+  TString outTxt = "./res_v2p1_pTrange/Resolution_INPUT_sys_rec_";
   outTxt.Append(sys_object[sys_cutN]);
   outTxt.Append(Form("_var%d_iter%d_", sys_varN, sys_iterN));
+  TString TsOutFile = outTxt;
   outTxt.Append(".txt");
+
   std::ofstream ResoFile(outTxt,ofstream::out);
 
   TProfile *profile_correlation_epd_east[2][6], *profile_correlation_epd_tpc[2][4];
@@ -130,12 +132,12 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
   }
 
   // ------------------ Fill into historgrams ----------------------------------
-  TString TsOutFile = "CorrReso_OUTPUT_";
-  TsOutFile.Append("sys_");
-  TsOutFile.Append(sys_object[sys_cutN]);
-  TsOutFile.Append(Form("_var%d_iter%d_", sys_varN, sys_iterN));
+  // TString TsOutFile = "CorrReso_OUTPUT_rec_";
+  // TsOutFile.Append("sys_");
+  // TsOutFile.Append(sys_object[sys_cutN]);
+  // TsOutFile.Append(Form("_var%d_iter%d_", sys_varN, sys_iterN));
   TsOutFile.Append(".picoDst.result.root");
-  TsOutFile.Prepend("./res/res_sysErr/");
+  // TsOutFile.Prepend("./res_v2p1_pTrange/");
   TFile* outFile = new TFile(TsOutFile,"RECREATE");
   TH1D *hist_correlation_epd_east[2][6], *hist_correlation_epd_tpc[2][4];
   TCanvas* c1[5];
@@ -145,8 +147,8 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
     c1[i]->GetFrame()->SetFillColor(21);
     c1[i]->GetFrame()->SetBorderSize(12);
     c1[i]->DrawFrame(0., 0.01, 80., 0.7);
-    c1[0]->DrawFrame(0., 0.01, 60., 0.7);
-    legend[i] = new TLegend(0.15,0.8,0.48,0.88);
+    // c1[0]->DrawFrame(0., 0.01, 60., 0.7);
+    legend[i] = new TLegend(0.15,0.6,0.6,0.88);
     legend[i] ->SetBorderSize(0);
   }
   Double_t x[_Ncentralities]  = {2.5,7.5,15,25,35,45,55,65,75};
@@ -302,9 +304,13 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
       ey5_1[n][j]=ep5Err[n][0][j];
 
        y1_2[n][j]=ep1Reso[n][1][j];
-      if(n==0){
+       if(n==0){
+         cout<<y1_2[n][j]<<",";
+         ResoFile<<"R_11 " << y1_2[n][j] ;
+       }// EPD 1, 3 TPC. n == 0 R1,
+      if(n==1){
         cout<<y1_2[n][j]<<",";
-        ResoFile << y1_2[n][j] << endl;
+        ResoFile<<"R_12 " << y1_2[n][j] << endl;
       }// EPD 1, 3 TPC. n == 0 R1,
      ey1_2[n][j]=ep1Err[n][1][j];
       y2_2[n][j]=ep2Reso[n][1][j];
@@ -355,7 +361,8 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
       ey1_2[n][3],ey1_2[n][4],ey1_2[n][5],
       ey1_2[n][6],ey1_2[n][7],ey1_2[n][8],
     };
-    gr1[n][1] = new TGraphErrors(_Ncentralities-2,x,d_y1_2,ex,d_ey1_2); // remove the 60 - 80 bin
+    // gr1[n][1] = new TGraphErrors(_Ncentralities-2,x,d_y1_2,ex,d_ey1_2); // remove the 60 - 80 % bin
+    gr1[n][1] = new TGraphErrors(_Ncentralities,x,d_y1_2,ex,d_ey1_2); // recover the 60 - 80 % bin
     gr1[n][1]->SetTitle("EPD sub1 event plane ");
     gr1[n][1]->SetMarkerColor(2*n+2);
     gr1[n][1]->SetMarkerStyle(22);
@@ -543,7 +550,7 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
     gr5[n][2]->SetMarkerStyle(23);
   }
   // legend[0]->AddEntry(gr1[0][0],"R_{1} EPD-1 VS EPD-2 & TPC","p");
-  legend[0]->AddEntry(gr1[0][1],"R_{1}","lp"); //EPD-1 VS EPD-2 & TPC
+  legend[0]->AddEntry(gr1[0][1],"R_{1} EPD-A VS EPD-B & TPC","lp"); //EPD-1 VS EPD-2 & TPC
   // legend[0]->AddEntry(gr1[0][2],"R_{1} EPD-1 VS EPD-4 & TPC","p");
   legend[1]->AddEntry(gr2[0][0],"R_{1} EPD-2 VS EPD-1 & TPC","p");
   legend[1]->AddEntry(gr2[0][1],"R_{1} EPD-2 VS EPD-3 & TPC","p");
@@ -558,7 +565,7 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
   legend[4]->AddEntry(gr5[0][1],"R_{1} TPC VS EPD-2 & EPD-3","p");
   legend[4]->AddEntry(gr5[0][2],"R_{1} TPC VS EPD-3 & EPD-4","p");
   // legend[0]->AddEntry(gr1[1][0],"R_{2} EPD-1 VS EPD-2 & TPC","p");
-  // legend[0]->AddEntry(gr1[1][1],"R_{2} EPD-1 VS EPD-2 & TPC","p");
+  legend[0]->AddEntry(gr1[1][1],"R_{2} EPD-A VS EPD-B & TPC","p");
   // legend[0]->AddEntry(gr1[1][2],"R_{2} EPD-1 VS EPD-4 & TPC","p");
   legend[1]->AddEntry(gr2[1][0],"R_{2} EPD-2 VS EPD-1 & TPC","p");
   legend[1]->AddEntry(gr2[1][1],"R_{2} EPD-2 VS EPD-3 & TPC","p");
@@ -577,7 +584,7 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
   ptxt_prelim->SetFillColor(0);
   ptxt_prelim -> AddText("Au+Au 7.2 GeV FXT");
   ptxt_prelim -> AddText("STAR preliminary");
-  TH2D * histTemp = new TH2D("histTemp","histTemp",1000,0,60,1000,0,0.6);
+  TH2D * histTemp = new TH2D("histTemp","histTemp",1000,0,80,1000,0,0.7);
   // histTemp->GetYaxis()->SetTitle("dv_{1}/dy|_{y=0}");
   histTemp->GetYaxis()->SetTitleOffset(1);
   histTemp->GetYaxis()->SetTitle("Resolution");
@@ -585,10 +592,10 @@ int corrFinder(const TString TsInfile = "/mnt/c/Users/pjska/github/FlowExtractor
   histTemp->Draw();
   // gr1[0][0]->Draw("P");
   gr1[0][1]->Draw("sameP");
-  ptxt_prelim->Draw("same");
+  // ptxt_prelim->Draw("same");
   // gr1[0][2]->Draw("P");
   // gr1[1][0]->Draw("P");
-  // gr1[1][1]->Draw("P");
+  gr1[1][1]->Draw("P");
   // gr1[1][2]->Draw("P");
   legend[0]->Draw("same");
   c1[1]->cd();

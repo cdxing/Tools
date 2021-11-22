@@ -43,3 +43,25 @@
 # Additonal sys check for dip angle and eta Range
 # ./resubmitJobs.pl EpCorrection_OUTPUT_sys_etaRange_var3_iter3
 # ./resubmitJobs.pl EpCorrection_OUTPUT_sys_etaRange_var4_iter3
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var3_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var4_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var5_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var6_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var7_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var8_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var9_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var10_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var11_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dedx_var12_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var3_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var4_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var5_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var6_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var7_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var8_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var9_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var10_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var11_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var12_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var13_iter1_
+./resubmitJobs.pl EpCorrection_OUTPUT_sys_dca_var14_iter1_
