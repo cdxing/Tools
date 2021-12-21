@@ -26,11 +26,11 @@
 use strict;
 use warnings;
 
-my $dir_to_open = "/star/data01/pwg/dchen/Ana/27gev_col_phi_flow/result";
+my $dir_to_open = "/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack/production";
 #my $dir_to_open = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/result";
 # Directory where the output files are
 
-my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/27gev_col_phi_flow/scheduler/tmp";
+my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/19p6GeV/minitree/ywTreeBack";
 #my $dir_to_open_1 = "/star/data01/pwg/dchen/Ana/7p2GeV_FXT_2018/KKinvM/scheduler/tmp";
 # Directory where you submit jobs
 
@@ -43,6 +43,7 @@ opendir my $dh, $dir_to_open or die " Could not open $!\n";
 
 my $name   = $ARGV[0];
 # $ARGV[0] is the first input argument: ./myPerl1_jobID.pl AB8F79ABBB628CC0B96256E4863BF059
+my $numbers   = $ARGV[1];
 my $JobID;
 
 my @unsorted;
@@ -57,9 +58,9 @@ while(my $thing = readdir $dh)
       my @aFiles   = split /_/, $thing;
 	    #split the file name into several sections by "_"
 	    #Example: AB8F79ABBB628CC0B96256E4863BF059_50.picoDst.result.root ==> @aFiles = {AB8F79ABBB628CC0B96256E4863BF059, 50.picoDst.result.root}
-      my $vAppend  = $aFiles[7]; # Modify the parameter to get the last section divided by "_"
+      my $vAppend  = $aFiles[1]; # Modify the parameter to get the last section divided by "_"
 	    # 50.picoDst.result.root
-      $JobID = $aFiles[6]; # Modify the parameter to get the JOBID
+      $JobID = $aFiles[0]; # Modify the parameter to get the JOBID
 	    # AB8F79ABBB628CC0B96256E4863BF059
       my @aNumbers = split /\./, $vAppend;
 	    #  50.picoDst.result.root ==> @aNumbers = {50, picoDst, result, root}
@@ -77,7 +78,7 @@ my @sorted = sort{$a <=> $b} @unsorted;
 
 my %missingnum;
 # a hash of missing numbers
-for(my $i=0; $i<=905; $i++) # modify the total # of Jobs here
+for(my $i=0; $i<$numbers; $i++) # modify the total # of Jobs here
 {
     $missingnum{$i} = 0;
 }
@@ -86,6 +87,7 @@ foreach my $number (@sorted)
 {
     $missingnum{$number} = 1;
     #print "$number\n";
+
 }
 
 chdir "${dir_to_open_1}";
@@ -99,15 +101,18 @@ foreach my $i (keys %missingnum)
     {
       push(@missingDst, $i);
 
-      # print ("star-submit -r $i $JobID.session.xml\n");
+      #  print ("star-submit -r $i $JobID.session.xml\n");
 
     }
 
 }
 # print  join(',',@missingDst);
-my $jobString = join(',',@missingDst);
+my @sortedmDst = sort{$a <=> $b} @missingDst;
+my $jobString = join(',',@sortedmDst);
 # make array of missingDst into a string separated by ","
+my $size = (scalar( @sortedmDst));
 
-print ("star-submit -r $jobString $JobID.session.xml\n");
-# system("star-submit -r $jobString $JobID.session.xml\n");
+print "Resubmit $size jobs.\n";
+print ("star-submit -r $jobString sched$JobID.session.xml\n");
+system("star-submit -r $jobString sched$JobID.session.xml\n");
 # Uncomment the line above to re-submit jobs directly
